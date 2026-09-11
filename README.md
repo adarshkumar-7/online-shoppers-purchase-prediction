@@ -1,4 +1,6 @@
-# 🛒 Online Shoppers Purchase Intention Prediction
+
+
+\# 🛒 Online Shoppers Purchase Intention Prediction
 
 
 
@@ -17,12 +19,6 @@ An end-to-end machine learning project that predicts whether an online shopping 
 
 
 The final \*\*Gradient Boosting\*\* model is deployed as a \*\*Flask web application\*\* and hosted on \*\*Render\*\*.
-
-
-
-An end-to-end machine learning project that predicts whether an online shopping session is likely to result in a purchase.
-
-The final **Gradient Boosting** model is deployed as a **Flask web application** and hosted on **Render**.
 
 ## 🚀 Live Demo
 
@@ -131,9 +127,9 @@ The search used **F1-score** because the target class was imbalanced.
 Best parameters:
 
 ```text
-learning\\\_rate = 0.2
-max\\\_depth = 3
-n\\\_estimators = 100
+learning\\\\\\\_rate = 0.2
+max\\\\\\\_depth = 3
+n\\\\\\\_estimators = 100
 ```
 
 ### XGBoost
@@ -141,9 +137,9 @@ n\\\_estimators = 100
 Best parameters:
 
 ```text
-learning\\\_rate = 0.2
-max\\\_depth = 4
-n\\\_estimators = 150
+learning\\\\\\\_rate = 0.2
+max\\\\\\\_depth = 4
+n\\\\\\\_estimators = 150
 ```
 
 ### AdaBoost
@@ -151,9 +147,9 @@ n\\\_estimators = 150
 Best parameters:
 
 ```text
-learning\\\_rate = 0.2
-n\\\_estimators = 150
-estimator\\\_\\\_max\\\_depth = 2
+learning\\\\\\\_rate = 0.2
+n\\\\\\\_estimators = 150
+estimator\\\\\\\_\\\\\\\_max\\\\\\\_depth = 2
 ```
 
 The final deployed model remained the **untuned Gradient Boosting model**, as it provided the strongest overall test-set balance.
@@ -219,8 +215,8 @@ online-shoppers-purchase-prediction/
 ├── README.md
 │
 └── model/
-    ├── gradient\\\_boosting\\\_model.pkl
-    ├── ordinal\\\_encoder.pkl
+    ├── gradient\\\\\\\_boosting\\\\\\\_model.pkl
+    ├── ordinal\\\\\\\_encoder.pkl
     └── preprocessor.pkl
 ```
 
