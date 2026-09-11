@@ -1,8 +1,8 @@
-# Online Shoppers Purchase Intention Prediction
+# 🛒 Online Shoppers Purchase Intention Prediction
 
 An end-to-end machine learning project that predicts whether an online shopping session is likely to result in a purchase.
 
-The final Gradient Boosting model is deployed as a Flask web application and hosted on Render.
+The final **Gradient Boosting** model is deployed as a **Flask web application** and hosted on **Render**.
 
 ## Live Demo
 
@@ -10,24 +10,75 @@ The final Gradient Boosting model is deployed as a Flask web application and hos
 
 Enter shopping-session information and receive:
 
-- Purchase / No Purchase prediction
-- Estimated purchase probability
+* **Purchase / No Purchase prediction**
+* **Estimated purchase probability**
 
 ## Application Preview
 
-![Online Shoppers Purchase Intention Predictor](app_screenshot.png)
+!\[Online Shoppers Purchase Intention Predictor](app\_screenshot.png)
 
+## API Usage
+
+The Flask application also provides a JSON API endpoint for programmatic predictions.
+
+### Endpoint
+
+```text
+POST /api/predict
+```
+
+### Example Request
+
+```json
+{
+  "Administrative": 2,
+  "Administrative\_Duration": 40.0,
+  "Informational": 1,
+  "Informational\_Duration": 20.0,
+  "ProductRelated": 15,
+  "ProductRelated\_Duration": 500.0,
+  "BounceRates": 0.02,
+  "ExitRates": 0.04,
+  "PageValues": 10.0,
+  "SpecialDay": 0.0,
+  "Month": "May",
+  "OperatingSystems": "2",
+  "Browser": "2",
+  "Region": "1",
+  "TrafficType": "2",
+  "VisitorType": "Returning\_Visitor",
+  "Weekend": 0
+}
+```
+
+### Example Response
+
+```json
+{
+  "prediction": 0,
+  "label": "Unlikely to Purchase",
+  "probability": 38.49
+}
+```
+
+The API can be accessed at:
+
+```text
+https://online-shoppers-purchase-prediction.onrender.com/api/predict
+```
 
 ## Project Objective
 
 The objective is to predict whether an online shopping session will result in a purchase (`Revenue = 1`) or not (`Revenue = 0`).
 
-The dataset contains 12,330 online shopping sessions and 17 predictor variables.
+The dataset contains **12,330 online shopping sessions** and **17 predictor variables**.
 
 The target variable is imbalanced:
 
-* No Purchase: 84.53%
-* Purchase: 15.47%
+|Outcome|Percentage|
+|-|-:|
+|No Purchase|84.53%|
+|Purchase|15.47%|
 
 Because of this imbalance, model evaluation considers:
 
@@ -39,19 +90,31 @@ Because of this imbalance, model evaluation considers:
 
 ## Machine Learning Workflow
 
-The project follows an end-to-end machine learning workflow:
-
-1. Data loading and exploration
-2. Train-test split with stratification
-3. Categorical variable handling
-4. SMOTENC for class balancing on the training set
-5. Model training and comparison
-6. Ensemble modelling
-7. Hyperparameter tuning
-8. Final model selection
-9. Model serialization using `.pkl`
-10. Flask deployment
-11. Cloud hosting using Render
+```text
+Data Understanding
+       ↓
+Train-Test Split
+       ↓
+Categorical Variable Handling
+       ↓
+SMOTENC on Training Data
+       ↓
+Baseline Models
+       ↓
+Ensemble Models
+       ↓
+Hyperparameter Tuning
+       ↓
+Final Model Selection
+       ↓
+Model Serialization (.pkl)
+       ↓
+Flask Deployment
+       ↓
+GitHub
+       ↓
+Render Cloud Hosting
+```
 
 ## Models Evaluated
 
@@ -83,19 +146,19 @@ The final deployed model is **Gradient Boosting**.
 
 |Metric|Score|
 |-|-:|
-|Test Accuracy|0.8840|
-|Precision|0.6017|
-|Recall|0.7435|
-|F1-Score|0.6651|
-|Train-Test Gap|0.0392|
+|Test Accuracy|**0.8840**|
+|Precision|**0.6017**|
+|Recall|**0.7435**|
+|F1-Score|**0.6651**|
+|Train-Test Gap|**0.0392**|
 
-Gradient Boosting achieved the highest F1-score among the models evaluated while maintaining strong accuracy and a relatively small train-test gap.
+Gradient Boosting achieved the highest F1-score among the evaluated models while maintaining strong accuracy and a relatively small train-test gap.
 
 ## Hyperparameter Tuning
 
-Gradient Boosting, XGBoost and AdaBoost were further tuned using GridSearchCV with 5-fold cross-validation.
+Gradient Boosting, XGBoost and AdaBoost were tuned using **GridSearchCV with 5-fold cross-validation**.
 
-The search was performed using F1-score because the target class was imbalanced.
+The search used **F1-score** because the target class was imbalanced.
 
 ### Gradient Boosting
 
@@ -127,21 +190,58 @@ n\_estimators = 150
 estimator\_\_max\_depth = 2
 ```
 
-Although tuning improved some metrics for individual models, the untuned Gradient Boosting model remained the strongest overall model based on the final test-set comparison.
+Although tuning improved some metrics for individual models, the **untuned Gradient Boosting model** remained the strongest overall model based on the final test-set comparison.
 
-## Deployment
+## Model Improvement Journey
 
-The trained model and preprocessing components are serialized using `joblib`.
+### 1\. Baseline Models
 
-The Flask application:
+The initial models showed that class imbalance made the classifiers relatively conservative about predicting purchases. The Decision Trees also showed clear overfitting, with training accuracy reaching 1.00 while test performance was substantially lower.
 
-1. Loads the saved model and preprocessing artifacts
-2. Accepts new shopping-session information
-3. Applies the same preprocessing used during training
-4. Generates a purchase prediction
-5. Returns the estimated purchase probability
+### 2\. SMOTENC
 
-The application is hosted publicly using Render.
+SMOTENC was applied only to the training data to balance the purchase and non-purchase classes.
+
+This substantially improved minority-class detection, especially recall and F1 for several models.
+
+### 3\. Ensembling
+
+Ensemble methods improved the overall trade-off between accuracy, precision and recall.
+
+Gradient Boosting emerged as the strongest ensemble:
+
+* Accuracy: **0.8840**
+* Precision: **0.6017**
+* Recall: **0.7435**
+* F1: **0.6651**
+
+Stacking did not outperform Gradient Boosting and showed a substantially larger train-test gap.
+
+### 4\. Tuning
+
+Gradient Boosting, XGBoost and AdaBoost were tuned.
+
+Tuning improved some individual metrics, but the final comparison showed that the **untuned Gradient Boosting model** remained the strongest overall choice for deployment.
+
+## Deployment Architecture
+
+The deployed application follows a train-once, serve-many architecture:
+
+```text
+Saved Model + Preprocessing
+            ↓
+         Flask App
+            ↓
+     User Input Form
+            ↓
+      Preprocessing
+            ↓
+   Gradient Boosting Model
+            ↓
+ Prediction + Probability
+```
+
+SMOTENC is used **only during training**. It is not applied to new user inputs during prediction.
 
 ## Project Structure
 
@@ -151,6 +251,7 @@ online-shoppers-purchase-prediction/
 ├── app.py
 ├── requirements.txt
 ├── README.md
+├── app\_screenshot.png
 │
 └── model/
     ├── gradient\_boosting\_model.pkl
@@ -160,13 +261,13 @@ online-shoppers-purchase-prediction/
 
 ## Run Locally
 
-Install the required packages:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the Flask application:
+Run Flask:
 
 ```bash
 python -m flask --app app run
@@ -188,7 +289,8 @@ http://127.0.0.1:5000
 * XGBoost
 * Flask
 * Joblib
-* Git / GitHub
+* Git
+* GitHub
 * Render
 
 ## Deployment
@@ -198,4 +300,10 @@ The application is connected to GitHub and deployed on Render.
 **Live URL:**
 
 https://online-shoppers-purchase-prediction.onrender.com/
+
+## Project
+
+Built as an end-to-end machine learning project covering:
+
+**Data Preparation → Imbalanced Learning → Model Comparison → Ensembling → Hyperparameter Tuning → Model Serialization → Flask Deployment → Cloud Hosting**
 
