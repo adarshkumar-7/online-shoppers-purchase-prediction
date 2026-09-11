@@ -92,9 +92,9 @@ The search was performed using F1-score because the target class was imbalanced.
 Best parameters:
 
 ```text
-learning\\\\\\\_rate = 0.2
-max\\\\\\\_depth = 3
-n\\\\\\\_estimators = 100
+learning\_rate = 0.2
+max\_depth = 3
+n\_estimators = 100
 ```
 
 ### XGBoost
@@ -102,9 +102,9 @@ n\\\\\\\_estimators = 100
 Best parameters:
 
 ```text
-learning\\\\\\\_rate = 0.2
-max\\\\\\\_depth = 4
-n\\\\\\\_estimators = 150
+learning\_rate = 0.2
+max\_depth = 4
+n\_estimators = 150
 ```
 
 ### AdaBoost
@@ -112,9 +112,9 @@ n\\\\\\\_estimators = 150
 Best parameters:
 
 ```text
-learning\\\\\\\_rate = 0.2
-n\\\\\\\_estimators = 150
-estimator\\\\\\\_\\\\\\\_max\\\\\\\_depth = 2
+learning\_rate = 0.2
+n\_estimators = 150
+estimator\_\_max\_depth = 2
 ```
 
 Although tuning improved some metrics for individual models, the untuned Gradient Boosting model remained the strongest overall model based on the final test-set comparison.
@@ -143,8 +143,8 @@ online-shoppers-purchase-prediction/
 ├── README.md
 │
 └── model/
-    ├── gradient\\\\\\\_boosting\\\\\\\_model.pkl
-    ├── ordinal\\\\\\\_encoder.pkl
+    ├── gradient\_boosting\_model.pkl
+    ├── ordinal\_encoder.pkl
     └── preprocessor.pkl
 ```
 
