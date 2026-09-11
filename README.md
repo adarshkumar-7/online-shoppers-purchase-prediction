@@ -1,4 +1,4 @@
-# 🛒 Online Shoppers Purchase Intention Prediction
+# Online Shoppers Purchase Intention Prediction
 
 An end-to-end machine learning project that predicts whether an online shopping session is likely to result in a purchase.
 
@@ -17,55 +17,6 @@ Enter shopping-session information and receive:
 
 !\[Online Shoppers Purchase Intention Predictor](app\_screenshot.png)
 
-## API Usage
-
-The Flask application also provides a JSON API endpoint for programmatic predictions.
-
-### Endpoint
-
-```text
-POST /api/predict
-```
-
-### Example Request
-
-```json
-{
-  "Administrative": 2,
-  "Administrative\_Duration": 40.0,
-  "Informational": 1,
-  "Informational\_Duration": 20.0,
-  "ProductRelated": 15,
-  "ProductRelated\_Duration": 500.0,
-  "BounceRates": 0.02,
-  "ExitRates": 0.04,
-  "PageValues": 10.0,
-  "SpecialDay": 0.0,
-  "Month": "May",
-  "OperatingSystems": "2",
-  "Browser": "2",
-  "Region": "1",
-  "TrafficType": "2",
-  "VisitorType": "Returning\_Visitor",
-  "Weekend": 0
-}
-```
-
-### Example Response
-
-```json
-{
-  "prediction": 0,
-  "label": "Unlikely to Purchase",
-  "probability": 38.49
-}
-```
-
-The API can be accessed at:
-
-```text
-https://online-shoppers-purchase-prediction.onrender.com/api/predict
-```
 
 ## Project Objective
 
