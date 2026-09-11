@@ -4,9 +4,19 @@ An end-to-end machine learning project that predicts whether an online shopping 
 
 The final Gradient Boosting model is deployed as a Flask web application and hosted on Render.
 
-## Live Application
+## Live Demo
 
-**https://online-shoppers-purchase-prediction.onrender.com/**
+### [Open the Live Application](https://online-shoppers-purchase-prediction.onrender.com/)
+
+Enter shopping-session information and receive:
+
+- Purchase / No Purchase prediction
+- Estimated purchase probability
+
+## Application Preview
+
+![Online Shoppers Purchase Intention Predictor](app_screenshot.png)
+
 
 ## Project Objective
 
